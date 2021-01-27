@@ -343,7 +343,7 @@ function createTransfer() {
                     localStorage.setItem(`${frmAccntName.toUpperCase()}`,lsItem);
                     
                     let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
-                    alert(`${clients[i].accountName.toUpperCase()} transfer ${formatedAmount} to ₱${clients[j].accountName.toUpperCase()}`);
+                    alert(`${clients[i].accountName.toUpperCase()} transfer ₱${formatedAmount} to ${clients[j].accountName.toUpperCase()}`);
                 }
                 
                 if (toAccntNum === clients[j].accountNumber) {
