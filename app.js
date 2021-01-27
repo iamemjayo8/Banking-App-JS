@@ -255,8 +255,8 @@ function createWithdraw() {
     let newBal;
     today = dd + '/' + mm + '/' + yyyy;
     try {
-        if(acctNum === "" ) throw "Enter Client Account number.";
         if(acctName === "") throw "Enter Client Account name.";
+        if(acctNum === "" ) throw "Enter Client Account number.";        
         if(amount === "") throw "Enter the amount you want to withdraw";
     } catch (err) {
         alert(err);
