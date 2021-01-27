@@ -196,6 +196,15 @@ function createDeposit() {
     let bal = document.getElementById(`${acctNum}`);
     let newBal;
     today = dd + '/' + mm + '/' + yyyy;
+
+    try {
+        if(acctNum === "" ) throw "Enter Client Account Name.";
+        if(acctName === "") throw "Enter Client Account Number.";
+        if(amount === "") throw "Enter the amount you want to deposit";
+    } catch (err) {
+        alert(err);
+        return;
+    }
     
     let clientNameList = [];
     for(let j = 0; j < clients.length; j++){
@@ -245,6 +254,14 @@ function createWithdraw() {
     let bal = document.getElementById(`${acctNum}`);
     let newBal;
     today = dd + '/' + mm + '/' + yyyy;
+    try {
+        if(acctNum === "" ) throw "Enter Client Account Name.";
+        if(acctName === "") throw "Enter Client Account Number.";
+        if(amount === "") throw "Enter the amount you want to withdraw";
+    } catch (err) {
+        alert(err);
+        return;
+    }
     
     let clientNameList = [];
     for(let j = 0; j < clients.length; j++){
@@ -282,6 +299,9 @@ function createWithdraw() {
 
                 let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
                 alert(`${clients[i].accountName.toUpperCase()} withdraw ₱${formatedAmount}`);
+            }else{
+                alert("your account name and account number did not match.");
+                return;
             }
         }        
     }
@@ -298,6 +318,16 @@ function createTransfer() {
     let toBal = document.getElementById(`${toAccntNum}`);
     let x, accntNoList, isSenderInList, isReceiverInLIst;
     today = dd + '/' + mm + '/' + yyyy;
+
+    try {
+        if(frAccntNum === "" ) throw "Enter Sender Account Number.";
+        if(toAccntNum === "" ) throw "Enter Receiver Account Number.";
+        if(amount === "") throw "Enter the amount you want to transfer";
+    } catch (err) {
+        alert(err);
+        return;
+    }
+
     accntNoList = [];
     for(x = 0; x < clients.length; x++){
         accntNoList.push(clients[x].accountNumber);
