@@ -160,6 +160,8 @@ function addClient(){
     let client = JSON.stringify(newClient);
     localStorage.setItem(`${accntName.value.toUpperCase()}`,client);
 
+    alert(`${newClient.accountName.toUpperCase()} is successfully created with Initial balance: ₱${newClient.balance}`)
+
     clearInputFields();
    
 
@@ -225,6 +227,9 @@ function createDeposit() {
                 client = clients[i];
                 let lsItem = JSON.stringify(client);
                 localStorage.setItem(`${acctName.toUpperCase()}`,lsItem);
+                
+                let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
+                alert(`${clients[i].accountName.toUpperCase()} deposit ₱${formatedAmount}`);
             }
         }
     }  
@@ -257,7 +262,7 @@ function createWithdraw() {
                 let clientBal = clients[i].balance;
                 let formattedBal = clientBal.replace(/,/g, "");
                 let intBal = parseInt(formattedBal);
-                if(!intBal < parseInt(amount)){
+                if(intBal < parseInt(amount)){
                     alert("Insuficient Balance");
                     return;
                 }
@@ -274,6 +279,9 @@ function createWithdraw() {
                 client = clients[i];
                 let lsItem = JSON.stringify(client);
                 localStorage.setItem(`${acctName.toUpperCase()}`,lsItem);
+
+                let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
+                alert(`${clients[i].accountName.toUpperCase()} withdraw ₱${formatedAmount}`);
             }
         }        
     }
@@ -304,25 +312,28 @@ function createTransfer() {
         alert(err);
         return;
     }
-    for (let i = 0; i < clients.length; i++) {
+    for (let i = 0; i < clients.length; i++) {        
         if (frAccntNum === clients[i].accountNumber) {
             for (let j = 0;j < clients.length; j++) {
                 if (toAccntNum === clients[j].accountNumber) {
                     let clientBal = clients[i].balance;
                     let formattedBal = clientBal.replace(/,/g, "");
-                    let intBal = parseInt(formattedBal);
-                    if(!clientBal < parseInt(amount)){
+                    let intBal = parseInt(formattedBal);                    
+                    let newBal = intBal.toString();
+
+                    let senderBal = clients[i].balance.replace(/,/g, "");
+                    if(parseInt(senderBal) < parseInt(amount)){
                         alert("Insuficient Balance.");
                         return;
                     }
-                        let newBal = intBal.toString();
-                        newUserBal = newBal.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
-                        fromBal.innerHTML = `₱ ${newUserBal}`;
-                        clients[i].balance = newUserBal;
-                        clients[i].transLog.push({
-                        transaction: `transfer to ${clients[j].accountName}`,
-                        amount: `-₱${amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,')}`,
-                        date:today
+
+                    newUserBal = newBal.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
+                    fromBal.innerHTML = `₱ ${newUserBal}`;
+                    clients[i].balance = newUserBal;
+                    clients[i].transLog.push({
+                    transaction: `transfer to ${clients[j].accountName}`,
+                    amount: `-₱${amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,')}`,
+                    date:today
                     }); 
                     intBal -= parseInt(amount);
                                
@@ -330,6 +341,9 @@ function createTransfer() {
                     let fromClient = clients[i];
                     let lsItem = JSON.stringify(fromClient);
                     localStorage.setItem(`${frmAccntName.toUpperCase()}`,lsItem);
+                    
+                    let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
+                    alert(`${clients[i].accountName.toUpperCase()} transfer ${formatedAmount} to ₱${clients[j].accountName.toUpperCase()}`);
                 }
                 
                 if (toAccntNum === clients[j].accountNumber) {
@@ -350,7 +364,8 @@ function createTransfer() {
                     let toClient = clients[j];
                     let lsItem = JSON.stringify(toClient);
                     localStorage.setItem(`${toAccntName.toUpperCase()}`,lsItem);
-                }
+                }               
+                
             }
         } 
     }
