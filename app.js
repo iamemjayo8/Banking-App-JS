@@ -268,14 +268,17 @@ function createWithdraw() {
         let clientsName = clients[j].accountName;
         clientNameList.push(clientsName);
     }
+    console.log(clientNameList);
     let isClientInList = clientNameList.includes(acctName.toUpperCase());
     if(isClientInList !== true){
-        alert(`Please verify that Account Name: ${acctName} is enrolled and correct. `);
+        alert(`Please verify that Accounts is enrolled and correct. `);
         return;
     }else{
         let client;
         for (let i = 0; i < clients.length; i++) {
-            if (acctNum === clients[i].accountNumber && acctName.toUpperCase() === clients[i].accountName.toUpperCase()) {
+            let clientAccntName = clients[i].accountName.toUpperCase();
+            let cientAccntNo = clients[i].accountNumber;
+            if (acctNum === cientAccntNo && acctName.toUpperCase() === clientAccntName) {
                 let clientBal = clients[i].balance;
                 let formattedBal = clientBal.replace(/,/g, "");
                 let intBal = parseInt(formattedBal);
@@ -302,11 +305,11 @@ function createWithdraw() {
 
                 clearInputFields();
                 return;
-            }else{
-                alert("your account name and account number did not match.");
-                return;
             }
-        }        
+            
+        }  
+        alert("Client account name and account number are not match.");
+        return;      
     }   
 }
 
