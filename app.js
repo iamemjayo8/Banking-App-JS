@@ -214,7 +214,7 @@ function createDeposit() {
     let isClientInList = clientNameList.includes(acctName.toUpperCase());
     // console.log(isClientInList);
     if(isClientInList !== true){
-        alert(`Please verify that Account Name: ${accntName.value} is enrolled and correct. `);
+        alert(`Please verify that Account Name: ${accntName} is enrolled and correct. `);
         return;
     }else{
         let client;
@@ -239,11 +239,13 @@ function createDeposit() {
                 
                 let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
                 alert(`${clients[i].accountName.toUpperCase()} deposit ₱${formatedAmount}`);
+                clearInputFields();
+                return;
             }
         }
-    }  
-
-    clearInputFields();
+        alert("Client account name and account number did not match.");
+        return;
+    }     
 }
 
 
@@ -308,7 +310,7 @@ function createWithdraw() {
             }
             
         }  
-        alert("Client account name and account number are not match.");
+        alert("Client account name and account number did not match.");
         return;      
     }   
 }
