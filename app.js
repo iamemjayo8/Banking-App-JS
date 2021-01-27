@@ -270,7 +270,7 @@ function createWithdraw() {
     }
     let isClientInList = clientNameList.includes(acctName.toUpperCase());
     if(isClientInList !== true){
-        alert(`Please verify that Account Name: ${accntName.value} is enrolled and correct. `);
+        alert(`Please verify that Account Name: ${acctName} is enrolled and correct. `);
         return;
     }else{
         let client;
