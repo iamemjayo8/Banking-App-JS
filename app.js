@@ -299,14 +299,15 @@ function createWithdraw() {
 
                 let formatedAmount = amount.replace(/\d(?=(?:\d{3})+$)/g, '$&,');
                 alert(`${clients[i].accountName.toUpperCase()} withdraw ₱${formatedAmount}`);
+
+                clearInputFields();
+                return;
             }else{
                 alert("your account name and account number did not match.");
                 return;
             }
         }        
-    }
-
-    clearInputFields();
+    }   
 }
 
 
